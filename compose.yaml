@@ -4,34 +4,36 @@ services:
       context: ./frontend
     container_name: frontend
     ports:
-      - "3000:3000"
+      - "5173:5173"
     restart: always
     volumes:
       - ./frontend:/app
     networks:
-     - frontend_network
+      - frontend_network
     depends_on:
-     - backend
+      - backend
+
   backend:
     build:
       context: ./backend
     container_name: backend
     ports:
-      - "5000:5000"
+      - "5555:5555"
     restart: always
     networks:
       - frontend_network
       - backend_network
       - db_network
     environment:
-     - PORT=5555
-     - MONGODB_URL=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>?retryWrites=true&w=majority
+      PORT: 5555
+      MONGODB_URL: mongodb://db:27017/bookstore
     volumes:
       - ./backend:/app
     depends_on:
-     - db
+      - db
+
   db:
-    image: mongodb:7
+    image: mongo:7
     container_name: mongodb
     ports:
       - "27017:27017"
@@ -39,11 +41,11 @@ services:
     volumes:
       - ./data:/data/db
     environment:
-      - DB_NAME=mydatabase
-      - DB_USER=myuser
-      - DB_PASSWORD=mypassword
+      MONGO_INITDB_DATABASE: bookstore
     networks:
       - db_network
+
+networks:
   frontend_network:
     driver: bridge
   backend_network:
