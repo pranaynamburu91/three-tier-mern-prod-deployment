@@ -13,51 +13,35 @@ services:
       - frontend_network
     depends_on:
       - backend
-    command: npm run dev -- --host 0.0.0.0
-
+    command: npm run dev -- --host 0.0.0.0"
   backend:
     build:
       context: ./backend
     container_name: backend
-    ports:
+    ports: 
       - "5555:5555"
     restart: always
-    networks:
-      - frontend_network
-      - backend_network
-      - db_network
-    environment:
-      PORT: 5555
-      MONGODB_URL: mongodb://db:27017/bookstore
     volumes:
-      - ./backend:/app
+     - ./backend:/app
       - backend_node_modules:/app/node_modules
-    depends_on:
-      - db
-    command: npm run dev
-
+    networks:
+      - backend_network
   db:
     image: mongo:7
-    container_name: mongodb
+    container_name: db
     ports:
       - "27017:27017"
     restart: always
     volumes:
-      - mongo_data:/data/db
-    environment:
-      MONGO_INITDB_DATABASE: bookstore
+      - db_data:/data/db
     networks:
-      - db_network
-
+      - backend_network
+volumes:
+  frontend_node_modules:
+  backend_node_modules:
+  db_data:
 networks:
   frontend_network:
     driver: bridge
   backend_network:
     driver: bridge
-  db_network:
-    driver: bridge
-
-volumes:
-  frontend_node_modules:
-  backend_node_modules:
-  mongo_data:
