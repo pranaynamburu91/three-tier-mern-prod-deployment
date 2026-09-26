@@ -32,6 +32,8 @@ services:
     ports:
       - "27017:27017"
     restart: always
+    env_file:
+      - ./backend/.env
     volumes:
       - db_data:/data/db
     networks:
