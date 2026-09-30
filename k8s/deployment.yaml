@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: mernapp
+  labels:
+    app: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: pranaynamburu91/mernapp-frontend:v1.0
+        ports:
+        - containerPort: 5173
+
+
+...
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: mernapp
+  labels:
+    app: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: pranaynamburu91/mernapp-backend:v1.0
+        ports:
+        - containerPort: 5555
+
+...
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+  namespace: mernapp
+  labels:
+    app: db
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db
+        image: pranaynamburu91/mongodb:v1.0
+        ports:
+        - containerPort: 27017
