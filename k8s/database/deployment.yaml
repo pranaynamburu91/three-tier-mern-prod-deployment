@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: db-mongo
   namespace: mernapp
   labels:
-    app: frontend
+    app: db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: frontend
+      app: db
   template:
     metadata:
       labels:
-        app: frontend
+        app: db
     spec:
       containers:
-      - name: frontend
-        image: pranaynamburu91/mernapp-frontend:v1.0
+      - name: db
+        image: pranaynamburu91/mongodb:v1.0
         ports:
-        - containerPort: 5173
+        - containerPort: 27017
