@@ -18,5 +18,8 @@ spec:
       containers:
       - name: backend
         image: pranaynamburu91/backend:v1
+        env:
+        - name: MONGODB_URL
+          value: mongodb://database-service:27017/bookstore
         ports:
         - containerPort: 5555
