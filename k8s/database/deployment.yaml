@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: db
-        image: docker pull pranaynamburu91/db-mongo
+        image: pranaynamburu91/db-mongo
         ports:
         - containerPort: 27017
