@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: db
-        image: pranaynamburu91/mongodb:v1
+        image: pranaynamburu91/db-mongo:v1
         ports:
         - containerPort: 27017

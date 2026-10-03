@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: pranaynamburu91/mernapp-frontend:v1
+        image: pranaynamburu91/frontend:v1
         ports:
         - containerPort: 5173

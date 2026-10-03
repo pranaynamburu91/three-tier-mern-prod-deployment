@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: backend
-        image: pranaynamburu91/mernapp-backend:v1
+        image: pranaynamburu91/backend:v1
         ports:
         - containerPort: 5555
